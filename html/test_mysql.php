@@ -16,6 +16,31 @@ if ($mysqli->ping()) {
     printf ("Error: %s\n", $mysqli->error);
 }
 
+// if used with 'EOD' there will be no substitutions
+
+$str = <<<'EOD'
+CREATE TABLE `contacts` (
+    `id` INT(11) NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(100) NOT NULL,
+    `age` INT(3) NOT NULL,
+    `email` VARCHAR(100) NOT NULL,
+    PRIMARY KEY  (`id`)
+  );
+EOD;
+
+
+// $stmt = $mysqli->prepare("INSERT INTO contacts (name,age,email) VALUES(?, ?, ?)");
+// $stmt->bind_param("sis", $name, $age, $email);
+// $stmt->execute();
+// printf("New record has ID %d.\n", $mysqli->insert_id);
+
+// $query = "SELECT Name, CountryCode, District FROM myCity";
+// $result = $mysqli->query($query);
+// while ($row = $result->fetch_row()) { // fetch_assoc
+//     printf("%s (%s,%s)\n", $row[0], $row[1], $row[2]);
+// }
+// $result->free();
+
 /* close connection */
 $mysqli->close();
 ?>
