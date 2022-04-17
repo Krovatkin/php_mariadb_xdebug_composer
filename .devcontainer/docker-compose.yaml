@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  php:
+    build: .
+    volumes:
+      - ../.vscode-server:/root/.vscode-server
+      - ../.vscode-server-insiders:/root/.vscode-server-insiders
+      - ../html:/var/www/html
+      - ../bin:/root/bin
+    ports:
+      - 8080:80
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_NAME: ${MYSQL_DATABASE}
+      WORDPRESS_DB_USER: ${MYSQL_USER}
+      WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD}
+      WORDPRESS_TABLE_PREFIX: ${WORDPRESS_TABLE_PREFIX}
+    depends_on:
+      - db
+    restart: unless-stopped
+  db:
+    image: mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    volumes:
+      - ./mysql:/var/lib/mysql
+    restart: unless-stopped
