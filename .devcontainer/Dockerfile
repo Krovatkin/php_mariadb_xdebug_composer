@@ -7,4 +7,5 @@ RUN printf "zend_extension=xdebug\n\
 [xdebug]\n\
 xdebug.mode=develop,debug\n\
 xdebug.client_host=localhost\n\
+xdebug.client_port=9003\n\
 xdebug.start_with_request=yes" > /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
